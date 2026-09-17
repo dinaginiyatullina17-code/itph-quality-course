@@ -8,7 +8,7 @@
   <title>Как работать с ITPH на смене</title>
   <link rel="stylesheet" href="css/kuds.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-2">
+  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-3">
 </head>
 <body>
   <nav id="top-nav" aria-label="Навигация по курсу">
@@ -69,11 +69,12 @@
           <p class="hook-answer">Это нормально. ITPH покажет отклонение, а наблюдение за скоростью обслуживания и работой на станциях подскажет решение.</p>
         </div>
 
-        <div class="body-copy fade-in"><p>ITPH — следствие того, как организована смена.</p><p>Если он ниже цели, часов сотрудников может быть больше, чем нужно при текущем потоке. Если выше — команда может быть перегружена.</p><p>Цель по ITPH ты можешь узнать у директора, а также в программах Brave&amp;Bold и WFM.</p><p>Даже у ресторанов одного формата цели могут различаться: они зависят от категории ресторана и применимых нормативов труда.</p></div>
+        <div class="body-copy fade-in"><p>ITPH — следствие того, как организована смена.</p><p>Если он ниже цели, часов сотрудников может быть больше, чем нужно при текущем потоке. Если выше — команда может быть перегружена.</p><p>Цель по ITPH ты можешь узнать у директора, а также в программах Brave&amp;Bold и WFM.</p></div>
         <div class="target-screens fade-in" aria-label="Где найти цель по ITPH">
           <figure class="target-screen" id="target-screen-bnb"><b>Brave&amp;Bold</b><figcaption>Место для скриншота с целью по ITPH</figcaption></figure>
           <figure class="target-screen" id="target-screen-wfm"><b>WFM</b><figcaption>Место для скриншота с целью по ITPH</figcaption></figure>
         </div>
+        <p class="target-caption fade-in">Даже у ресторанов одного формата цели могут различаться: они зависят от категории ресторана и применимых нормативов труда.</p>
         <div class="route-intro fade-in"><strong>Чтобы принять решение на смене, используй три действия</strong></div>
         <div class="route-strip fade-in" aria-label="Три действия для принятия решения">
           <div><b>1</b><span>Сверь ITPH с целью</span></div><i>→</i>
@@ -114,7 +115,6 @@
           <div class="feedback-box" id="calc-feedback" aria-live="polite"></div>
         </div>
 
-        <div class="section-title fade-in"><p class="eyebrow">Важно</p><h2>Высокий ITPH — не всегда плохо. Низкий — не всегда хорошо.</h2></div>
         <div class="deviation-map fade-in" aria-label="Как найти причину отклонения">
           <div class="deviation-map-title"><span>3 шага</span><h3>Как найти причину отклонения</h3></div>
           <ol>
@@ -123,6 +123,7 @@
             <li><span>03</span><div><b>Сравни динамику</b><small>Во время смены — по часам. После — с аналогичным днём прошлой недели.</small></div></li>
           </ol>
         </div>
+        <div class="section-title fade-in"><p class="eyebrow">Важно</p><h2>Высокий ITPH — не всегда плохо. Низкий — не всегда хорошо.</h2></div>
         <div class="signal-pair fade-in">
           <article><span class="signal-dot high"></span><div><b>ITPH выше цели</b><p>Сначала пойми: это резкий наплыв, сместился пик или показатель держится высоким уже несколько часов.</p><p class="signal-focus">Проверь скорость обслуживания, качество и западающую зону. При длительной перегрузке попроси сотрудника выйти раньше, попроси помощь у соседнего ресторана или договорись о выходе в выходной.</p></div></article>
           <article><span class="signal-dot low"></span><div><b>ITPH ниже цели</b><p>Сначала пойми: это первый час ниже цели или сегодня действительно мало Гостей.</p><p class="signal-focus">Проверь часовую динамику. Если это разовый час, используй время на перерывы по расписанию, подготовку к пику и чистоту. Если отклонение повторяется, отпусти сотрудника домой, выведи кого-то позже или перенаправь в другой ресторан — без ущерба следующему управляющему сменой.</p></div></article>
@@ -139,11 +140,10 @@
           </div>
           <div class="pattern-feedback" id="pattern-feedback" aria-live="polite">Нажми на день и сделай вывод из двух показателей.</div>
         </div>
-        <aside class="target-note fade-in"><strong>Важно:</strong> отклонение ITPH в любую сторону требует внимания. Ориентируйся на цель и оценивай показатель в динамике вместе со скоростью и качеством.</aside>
         <div class="pattern-conclusion fade-in">
           <p class="eyebrow">Вывод</p>
-          <h2>По одной цифре ITPH нельзя понять, что происходит на смене.</h2>
-          <p>Сопоставляй показатель со скоростью обслуживания и наблюдением за сотрудниками и работой на станциях.</p>
+          <h2>Смотри на цель и динамику, а не на одну цифру.</h2>
+          <p>Отклонение ITPH в любую сторону требует внимания. Сопоставляй показатель со скоростью, качеством и работой команды.</p>
         </div>
         <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('prepare')" data-requires-test="calc" aria-disabled="true">Подготовиться к смене <span>→</span></button><p class="test-reminder" id="test-reminder-calc" hidden aria-live="polite"></p></div>
       </div>
@@ -337,6 +337,6 @@
 
   </main>
 
-  <script src="script.js?v=20260917-2"></script>
+  <script src="script.js?v=20260917-3"></script>
 </body>
 </html>
