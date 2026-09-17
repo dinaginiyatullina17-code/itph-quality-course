@@ -1026,3 +1026,27 @@ input:focus-visible {
     transition: none;
   }
 }
+
+@media print {
+  @page { size: A4; margin: 12mm; }
+  html, body { background: #fff !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  body { padding-top: 0 !important; }
+  #top-nav, .next-row, .completion-panel, .interaction-cue, .interaction-hint { display: none !important; }
+  .page, .page.active { display: block !important; min-height: 0; }
+  .page:not(#page-home) { break-before: page; }
+  .fade-in { opacity: 1 !important; transform: none !important; }
+  .chapter-hero { height: auto; min-height: 92mm; break-after: avoid-page; }
+  .hero-placeholder { min-height: 180mm; }
+  .lesson-body, .home-content { width: 100%; }
+  .hook-card, .formula-card, .quiz-card, .pattern-card, .brief-card, .case-card,
+  .resource-panel, .completion-card, .callout, .deviation-map, .signal-pair article,
+  .prep-list label, .flag-grid button, .action-panel, .flip-card, .takeaway-path > li {
+    break-inside: avoid;
+  }
+  .flag-grid button small { max-height: none !important; opacity: 1 !important; }
+  .flip-grid { grid-template-columns: 1fr; }
+  .flip-card { min-height: auto; perspective: none; }
+  .flip-front, .flip-back { position: static; min-height: 90mm; transform: none !important; }
+  .flip-back { margin-top: 4mm; }
+  a { color: inherit; text-decoration: none; }
+}
