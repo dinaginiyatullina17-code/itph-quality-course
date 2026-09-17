@@ -575,6 +575,14 @@ const TEST_BY_FEEDBACK = {
   'control-feedback': 'control',
 };
 
+const FIRST_ATTEMPT_HINTS = {
+  'calc-feedback': 'Вспомни формулу: количество блюд нужно разделить на часы сотрудников.',
+  'control-feedback': 'Сначала определи, на каком этапе замедлился поток Гостей.',
+  'case-feedback-1': 'Сравни несколько часов и учти ожидаемый поток Гостей.',
+  'case-feedback-2': 'Сначала найди западающую зону, затем выбирай действие.',
+  'case-feedback-3': 'Начни с конкретной причины недовольства Гостя.',
+};
+
 function completeTest(testName) {
   if (!testName || completedTests.has(testName)) return;
   completedTests.add(testName);
@@ -586,18 +594,34 @@ function completeTest(testName) {
 function answerChoice(btn, isCorrect, feedbackId) {
   const group = btn.parentElement;
   const feedback = document.getElementById(feedbackId);
-  if (!feedback || btn.disabled) return;
+  if (!feedback || btn.disabled) return false;
+  const attempts = Number(group.dataset.attempts || 0);
   if (isCorrect) {
     completeTest(TEST_BY_FEEDBACK[feedbackId]);
     btn.classList.add('correct-choice');
     group.querySelectorAll('button').forEach(item => { item.disabled = true; });
     feedback.className = 'feedback-box show correct';
     feedback.innerHTML = '<strong>Верно.</strong> ' + (btn.dataset.success || 'Ты выбрал действие, которое связано с причиной отклонения.');
-  } else {
-    btn.classList.add('wrong-choice');
+    return true;
+  }
+
+  group.dataset.attempts = String(attempts + 1);
+  btn.classList.add('wrong-choice');
+  if (attempts === 0) {
     feedback.className = 'feedback-box show incorrect';
-    feedback.innerHTML = '<strong>Пока нет.</strong> ' + (btn.dataset.feedback || 'Сначала сопоставь ITPH с тем, что происходит на смене. Затем выбери действие по причине.');
+    feedback.innerHTML = '<strong>Попробуй ещё раз.</strong> ' + (FIRST_ATTEMPT_HINTS[feedbackId] || 'Сопоставь показатель с ситуацией на смене.');
     setTimeout(() => btn.classList.remove('wrong-choice'), 700);
+    return false;
+  } else {
+    const correctBtn = [...group.querySelectorAll('button')].find(item => item.getAttribute('onclick')?.includes(', true,'));
+    const correctReason = (correctBtn?.dataset.success || 'Этот вариант помогает устранить причину ситуации.').replace(/^Верно[.:]?\s*/i, '');
+    correctBtn?.classList.add('correct-choice');
+    group.querySelectorAll('button').forEach(item => { item.disabled = true; });
+    completeTest(TEST_BY_FEEDBACK[feedbackId]);
+    feedback.className = 'feedback-box show incorrect';
+    feedback.innerHTML = '<strong>Разбор ответа.</strong> ' + (btn.dataset.feedback || 'Этот вариант не устраняет причину ситуации.') +
+      '<br><strong>Верный ответ: «' + (correctBtn?.textContent.trim() || '') + '».</strong> ' + correctReason;
+    return true;
   }
 }
 
@@ -692,8 +716,8 @@ function flipMistake(btn) {
 const practiceSolved = new Set();
 
 function answerCase(btn, isCorrect, feedbackId) {
-  answerChoice(btn, isCorrect, feedbackId);
-  if (!isCorrect) return;
+  const completed = answerChoice(btn, isCorrect, feedbackId);
+  if (!completed) return;
   practiceSolved.add(feedbackId);
   const result = document.getElementById('practice-result');
   if (!result) return;
@@ -703,6 +727,23 @@ function answerCase(btn, isCorrect, feedbackId) {
     : 'Осталось разобрать кейсов: ' + (3 - done) + '.';
   result.innerHTML = '<span>' + done + ' / 3</span><p>' + message + '</p>';
   if (done === 3) completeTest('practice');
+}
+
+function openScreenshot(button) {
+  const source = button.querySelector('img');
+  const dialog = document.getElementById('screenshot-dialog');
+  const image = document.getElementById('screenshot-dialog-image');
+  if (!source || !dialog || !image) return;
+  image.src = source.currentSrc || source.src;
+  image.alt = source.alt;
+  dialog.showModal();
+}
+
+function closeScreenshot(event) {
+  const dialog = document.getElementById('screenshot-dialog');
+  if (!dialog) return;
+  if (event && event.target !== dialog) return;
+  dialog.close();
 }
 
 

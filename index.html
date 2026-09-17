@@ -8,7 +8,7 @@
   <title>Как работать с ITPH на смене</title>
   <link rel="stylesheet" href="css/kuds.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-5">
+  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-6">
 </head>
 <body>
   <nav id="top-nav" aria-label="Навигация по курсу">
@@ -74,8 +74,8 @@
 
         <div class="body-copy fade-in"><p>ITPH — следствие того, как организована смена.</p><p>Если он ниже цели, часов сотрудников может быть больше, чем нужно при текущем потоке. Если выше — команда может быть перегружена.</p><p>Цель по ITPH ты можешь узнать у директора, а также в программах Brave&amp;Bold и WFM.</p></div>
         <div class="target-screens fade-in" aria-label="Где найти цель по ITPH">
-          <figure class="target-screen" id="target-screen-bnb"><img src="assets/images/itph-brave-bold-crop.png" alt="Показатель ITPH на дашборде Brave&amp;Bold"><figcaption><b>Brave&amp;Bold</b> — ITPH на дашборде</figcaption></figure>
-          <figure class="target-screen" id="target-screen-wfm"><img src="assets/images/itph-wfm-crop.png" alt="Целевой и плановый ITPH в расписании WFM"><figcaption><b>WFM</b> — целевой и плановый ITPH</figcaption></figure>
+          <figure class="target-screen" id="target-screen-bnb"><button class="screenshot-zoom" type="button" onclick="openScreenshot(this)" aria-label="Увеличить скриншот Brave&amp;Bold"><img src="assets/images/itph-brave-bold-crop.png?v=20260917-6" alt="Показатель ITPH на дашборде Brave&amp;Bold"><span>Увеличить ↗</span></button><figcaption><b>Brave&amp;Bold</b> — ITPH на дашборде</figcaption></figure>
+          <figure class="target-screen" id="target-screen-wfm"><button class="screenshot-zoom" type="button" onclick="openScreenshot(this)" aria-label="Увеличить скриншот WFM"><img src="assets/images/itph-wfm-crop.png?v=20260917-6" alt="Целевой и плановый ITPH в расписании WFM"><span>Увеличить ↗</span></button><figcaption><b>WFM</b> — целевой и плановый ITPH</figcaption></figure>
         </div>
         <p class="target-caption fade-in">Даже у ресторанов одного формата цели могут различаться: они зависят от категории ресторана и применимых нормативов труда.</p>
         <div class="route-intro fade-in"><strong>Чтобы принять решение на смене, используй три действия</strong></div>
@@ -340,6 +340,11 @@
 
   </main>
 
-  <script src="script.js?v=20260917-5"></script>
+  <dialog class="screenshot-dialog" id="screenshot-dialog" onclick="closeScreenshot(event)">
+    <button class="screenshot-dialog-close" type="button" onclick="closeScreenshot()" aria-label="Закрыть увеличенный скриншот">×</button>
+    <img id="screenshot-dialog-image" src="" alt="">
+  </dialog>
+
+  <script src="script.js?v=20260917-6"></script>
 </body>
 </html>
