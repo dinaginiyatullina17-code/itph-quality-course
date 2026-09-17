@@ -8,13 +8,16 @@
   <title>Как работать с ITPH на смене</title>
   <link rel="stylesheet" href="css/kuds.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-4">
+  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-5">
 </head>
 <body>
   <nav id="top-nav" aria-label="Навигация по курсу">
     <div class="nav-inner">
+      <button class="nav-back-btn" id="nav-back-btn" type="button" onclick="goBack()" aria-label="Вернуться к предыдущей главе">
+        <span aria-hidden="true">←</span><span>Назад</span>
+      </button>
       <button class="nav-home-btn" type="button" onclick="navigateTo('home')" aria-label="Вернуться на главную">
-        <span aria-hidden="true">←</span><span>К курсу</span>
+        <span>К курсу</span>
       </button>
       <span id="nav-chapter"></span>
       <span id="nav-progress" aria-live="polite"></span>
@@ -71,8 +74,8 @@
 
         <div class="body-copy fade-in"><p>ITPH — следствие того, как организована смена.</p><p>Если он ниже цели, часов сотрудников может быть больше, чем нужно при текущем потоке. Если выше — команда может быть перегружена.</p><p>Цель по ITPH ты можешь узнать у директора, а также в программах Brave&amp;Bold и WFM.</p></div>
         <div class="target-screens fade-in" aria-label="Где найти цель по ITPH">
-          <figure class="target-screen" id="target-screen-bnb"><b>Brave&amp;Bold</b><figcaption>Место для скриншота с целью по ITPH</figcaption></figure>
-          <figure class="target-screen" id="target-screen-wfm"><b>WFM</b><figcaption>Место для скриншота с целью по ITPH</figcaption></figure>
+          <figure class="target-screen" id="target-screen-bnb"><img src="assets/images/itph-brave-bold-crop.png" alt="Показатель ITPH на дашборде Brave&amp;Bold"><figcaption><b>Brave&amp;Bold</b> — ITPH на дашборде</figcaption></figure>
+          <figure class="target-screen" id="target-screen-wfm"><img src="assets/images/itph-wfm-crop.png" alt="Целевой и плановый ITPH в расписании WFM"><figcaption><b>WFM</b> — целевой и плановый ITPH</figcaption></figure>
         </div>
         <p class="target-caption fade-in">Даже у ресторанов одного формата цели могут различаться: они зависят от категории ресторана и применимых нормативов труда.</p>
         <div class="route-intro fade-in"><strong>Чтобы принять решение на смене, используй три действия</strong></div>
@@ -83,7 +86,7 @@
         </div>
 
         <aside class="callout fade-in"><strong>Главная мысль</strong><p>ITPH — показатель производительности труда.</p><p>От него зависит чистая прибыль ресторана: нельзя вывести слишком много или слишком мало сотрудников.</p></aside>
-        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('meaning')">Разобраться с показателем <span>→</span></button></div>
+        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('meaning')">Разобраться с показателем <span>→</span></button><p class="test-reminder" id="gate-reminder-intro" hidden aria-live="polite"></p></div>
       </div>
     </section>
 
@@ -145,7 +148,7 @@
           <h2>Смотри на цель и динамику, а не на одну цифру.</h2>
           <p>Отклонение ITPH в любую сторону требует внимания. Сопоставляй показатель со скоростью, качеством и работой команды.</p>
         </div>
-        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('prepare')" data-requires-test="calc" aria-disabled="true">Подготовиться к смене <span>→</span></button><p class="test-reminder" id="test-reminder-calc" hidden aria-live="polite"></p></div>
+        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('prepare')" data-requires-test="calc" aria-disabled="true">Подготовиться к смене <span>→</span></button><p class="test-reminder" id="gate-reminder-meaning" hidden aria-live="polite"></p></div>
       </div>
     </section>
 
@@ -173,7 +176,7 @@
           <blockquote>«С 12:00 ждём пик. Перед пиком каждый проверяет готовность своей станции. Координатор кухни — Анна. На бройлере — Илья, на борту — Мария, на кассе — Денис. Напоминаю о вежливости, гостеприимстве и соблюдении рецептуры. Сотрудник на сборке контролирует скорость обслуживания и зовёт помощь, если на выдаче больше четырёх Гостей».</blockquote>
         </div>
         <aside class="callout fade-in"><strong>Подготовка — это не попытка угадать смену</strong><p>Это твоё внимание к тому, что происходит на смене, и быстрая реакция. Ты заранее выбрал точки внимания: продукция пополнена, сотрудники знают свои места и действия. Но ситуация может меняться — будь готов перестроиться.</p></aside>
-        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('control')">Перейти к контролю <span>→</span></button></div>
+        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('control')">Перейти к контролю <span>→</span></button><p class="test-reminder" id="gate-reminder-prepare" hidden aria-live="polite"></p></div>
       </div>
     </section>
 
@@ -216,7 +219,7 @@
           </div>
           <div class="feedback-box" id="control-feedback" aria-live="polite"></div>
         </div>
-        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('actions')" data-requires-test="control" aria-disabled="true">Выбрать решение <span>→</span></button><p class="test-reminder" id="test-reminder-control" hidden aria-live="polite"></p></div>
+        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('actions')" data-requires-test="control" aria-disabled="true">Выбрать решение <span>→</span></button><p class="test-reminder" id="gate-reminder-control" hidden aria-live="polite"></p></div>
       </div>
     </section>
 
@@ -237,7 +240,7 @@
         <div class="action-panel fade-in" id="action-panel" role="tabpanel" aria-live="polite"></div>
 
         <aside class="callout fade-in"><strong>Работай не только с цифрой, но и с причиной</strong><p>Цель по ITPH нужно выполнять. Но решение выбирай по ситуации на смене: показателю, скорости обслуживания, работе на станциях и отзывам Гостей.</p></aside>
-        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('mistakes')">Увидеть ловушки <span>→</span></button></div>
+        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('mistakes')">Увидеть ловушки <span>→</span></button><p class="test-reminder" id="gate-reminder-actions" hidden aria-live="polite"></p></div>
       </div>
     </section>
 
@@ -255,7 +258,7 @@
           <button class="flip-card" type="button" onclick="flipMistake(this)" aria-expanded="false"><span class="flip-front"><small>Ошибка 03</small><b>Ориентироваться только на цифры из Brave&amp;Bold</b><i>Нажми, чтобы перевернуть</i></span><span class="flip-back"><small>Решение</small><b>После цифры посмотри на смену.</b><p>Проверь расстановку, работу на станциях и не простаивают ли сотрудники, которые могут заняться уборкой или пополнением.</p></span></button>
         </div>
         <div class="body-copy fade-in"><p>Теперь проверь себя в трёх ситуациях на смене: выбери действие, которое поможет устранить причину, а не просто отреагировать на цифру.</p></div>
-        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('practice')">Пройти три кейса <span>→</span></button></div>
+        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('practice')">Пройти три кейса <span>→</span></button><p class="test-reminder" id="gate-reminder-mistakes" hidden aria-live="polite"></p></div>
       </div>
     </section>
 
@@ -301,7 +304,7 @@
         </div>
 
         <div class="practice-result fade-in" id="practice-result" aria-live="polite"><span>0 / 3</span><p>Реши все кейсы, чтобы собрать алгоритм целиком.</p></div>
-        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('summary')" data-requires-test="practice" aria-disabled="true">Собрать главное <span>→</span></button><p class="test-reminder" id="test-reminder-practice" hidden aria-live="polite"></p></div>
+        <div class="next-row"><button class="btn-primary" type="button" onclick="advanceTo('summary')" data-requires-test="practice" aria-disabled="true">Собрать главное <span>→</span></button><p class="test-reminder" id="gate-reminder-practice" hidden aria-live="polite"></p></div>
       </div>
     </section>
 
@@ -337,6 +340,6 @@
 
   </main>
 
-  <script src="script.js?v=20260917-3"></script>
+  <script src="script.js?v=20260917-5"></script>
 </body>
 </html>

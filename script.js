@@ -50,6 +50,10 @@ const CHAPTER_NAMES = {
 
 let currentPage = 'home';
 let unlockedChapters = 1;          // сколько глав открыто (1..N)
+const viewedPatterns = new Set();
+const openedFlags = new Set();
+const viewedActions = new Set();
+const openedMistakes = new Set();
 
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -67,6 +71,7 @@ function navigateTo(pageId) {
   if (!target) return;
   target.classList.add('active');
   currentPage = pageId;
+  document.getElementById('nav-back-btn')?.toggleAttribute('hidden', pageId === 'home');
   window.scrollTo({ top: 0, behavior: 'auto' });
 
   // 2) шапка + прогресс-бар
@@ -84,17 +89,60 @@ function navigateTo(pageId) {
   setTimeout(initFadeIn, 50);
 
   // 4) инициализаторы конкретных страниц — добавляй свои
-  if (pageId === 'actions') renderAction('quality');
+  if (pageId === 'actions') {
+    renderAction('quality');
+    viewedActions.add('quality');
+  }
 
+}
+
+function goBack() {
+  const idx = CHAPTER_ORDER.indexOf(currentPage);
+  navigateTo(idx <= 0 ? 'home' : CHAPTER_ORDER[idx - 1]);
+}
+
+const PAGE_GATES = {
+  meaning: {
+    complete: () => completedTests.has('calc') && viewedPatterns.size === 2,
+    hint: 'Изучи оба примера и реши тест.',
+  },
+  prepare: {
+    complete: () => document.querySelectorAll('.prep-list input:checked').length === 3,
+    hint: 'Изучи и отметь все три шага подготовки.',
+  },
+  control: {
+    complete: () => completedTests.has('control') && openedFlags.size === 4,
+    hint: 'Изучи все четыре сигнала и реши тест.',
+  },
+  actions: {
+    complete: () => viewedActions.size === 3,
+    hint: 'Изучи все три ситуации.',
+  },
+  mistakes: {
+    complete: () => openedMistakes.size === 3,
+    hint: 'Изучи решения на всех трёх карточках.',
+  },
+  practice: {
+    complete: () => completedTests.has('practice'),
+    hint: 'Изучи и правильно реши все три кейса.',
+  },
+};
+
+function showGateReminder(pageId) {
+  const hint = document.getElementById('gate-reminder-' + pageId);
+  if (!hint) return;
+  hint.hidden = false;
+  hint.textContent = PAGE_GATES[pageId]?.hint || 'Изучи все материалы главы.';
+  hint.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 /* Следующая глава открывается только по кнопке в конце текущей главы. */
 function advanceTo(pageId) {
   const idx = CHAPTER_ORDER.indexOf(pageId);
   if (idx === -1) return;
-  const requiredTest = REQUIRED_TESTS[pageId];
-  if (requiredTest && !completedTests.has(requiredTest)) {
-    showTestReminder(requiredTest);
+  const gate = PAGE_GATES[currentPage];
+  if (gate && !gate.complete()) {
+    showGateReminder(currentPage);
     return;
   }
   const required = idx + 1;
@@ -539,9 +587,8 @@ function answerChoice(btn, isCorrect, feedbackId) {
   const group = btn.parentElement;
   const feedback = document.getElementById(feedbackId);
   if (!feedback || btn.disabled) return;
-  completeTest(TEST_BY_FEEDBACK[feedbackId]);
-
   if (isCorrect) {
+    completeTest(TEST_BY_FEEDBACK[feedbackId]);
     btn.classList.add('correct-choice');
     group.querySelectorAll('button').forEach(item => { item.disabled = true; });
     feedback.className = 'feedback-box show correct';
@@ -555,6 +602,8 @@ function answerChoice(btn, isCorrect, feedbackId) {
 }
 
 function showPattern(btn, type) {
+  viewedPatterns.add(type);
+  document.getElementById('gate-reminder-meaning')?.setAttribute('hidden', '');
   document.querySelectorAll('.pattern-grid button').forEach(item => item.classList.toggle('active', item === btn));
   const feedback = document.getElementById('pattern-feedback');
   if (!feedback) return;
@@ -568,6 +617,7 @@ function updatePrep() {
   const done = boxes.filter(box => box.checked).length;
   const counter = document.getElementById('prep-count');
   if (counter) counter.textContent = done + ' / ' + boxes.length;
+  if (done === boxes.length) document.getElementById('gate-reminder-prepare')?.setAttribute('hidden', '');
 }
 
 function toggleFlag(btn) {
@@ -575,6 +625,8 @@ function toggleFlag(btn) {
   btn.setAttribute('aria-expanded', String(isOpen));
   const cue = btn.querySelector('.interaction-cue');
   if (cue) cue.textContent = isOpen ? 'Свернуть −' : 'Что проверить +';
+  openedFlags.add([...document.querySelectorAll('.flag-grid button')].indexOf(btn));
+  if (openedFlags.size === 4) document.getElementById('gate-reminder-control')?.setAttribute('hidden', '');
 }
 
 
@@ -620,6 +672,8 @@ function renderAction(key) {
 }
 
 function selectAction(btn, key) {
+  viewedActions.add(key);
+  if (viewedActions.size === 3) document.getElementById('gate-reminder-actions')?.setAttribute('hidden', '');
   document.querySelectorAll('.action-tabs button').forEach(item => {
     const active = item === btn;
     item.classList.toggle('active', active);
@@ -631,12 +685,15 @@ function selectAction(btn, key) {
 function flipMistake(btn) {
   const isFlipped = btn.classList.toggle('flipped');
   btn.setAttribute('aria-expanded', String(isFlipped));
+  openedMistakes.add([...document.querySelectorAll('.flip-card')].indexOf(btn));
+  if (openedMistakes.size === 3) document.getElementById('gate-reminder-mistakes')?.setAttribute('hidden', '');
 }
 
 const practiceSolved = new Set();
 
 function answerCase(btn, isCorrect, feedbackId) {
   answerChoice(btn, isCorrect, feedbackId);
+  if (!isCorrect) return;
   practiceSolved.add(feedbackId);
   const result = document.getElementById('practice-result');
   if (!result) return;
