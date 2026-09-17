@@ -842,13 +842,26 @@ input:focus-visible {
 .target-screen { margin: 0; padding: 18px; border: 1px dashed var(--ku-text-muted); border-radius: 12px; background: var(--ku-surface); }
 .target-screen figcaption { margin-top: 8px; font-size: 13px; color: var(--ku-text-muted); }
 .target-note { padding: 16px 20px; border-left: 3px solid var(--ku-brand-strong); background: var(--ku-brand-soft); font-size: 15px; line-height: 1.6; }
+.deviation-map { padding: var(--ku-space-l); border: var(--ku-border-w) solid var(--ku-border); border-radius: var(--ku-radius-l); background: var(--ku-card); box-shadow: var(--ku-shadow-s); }
+.deviation-map-title { display: flex; gap: 0.75rem; align-items: center; margin-bottom: var(--ku-space-m); }
+.deviation-map-title span { padding: 0.35rem 0.65rem; border-radius: var(--ku-radius-pill); color: var(--ku-brand-on); background: var(--ku-brand); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
+.deviation-map-title h3 { margin: 0; font-family: var(--ku-font-display); font-size: clamp(1.25rem, 3vw, 1.75rem); }
+.deviation-map ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ku-gap-m); margin: 0; padding: 0; list-style: none; }
+.deviation-map li { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 0.75rem; align-items: start; padding: var(--ku-space-m); border-radius: var(--ku-radius-m); background: var(--ku-surface); }
+.deviation-map li > span { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; color: var(--ku-brand-on); background: var(--ku-brand); font-size: 0.72rem; font-weight: 850; }
+.deviation-map li:not(:last-child)::after { content: '→'; position: absolute; right: -1.05rem; top: 50%; z-index: 1; transform: translateY(-50%); color: var(--ku-brand-strong); font-size: 1.3rem; font-weight: 800; }
+.deviation-map b { display: block; margin-bottom: 0.35rem; font-family: var(--ku-font-display); }
+.deviation-map small { color: var(--ku-text-soft); line-height: 1.45; }
 .flag-grid button > .interaction-cue,
 .pattern-grid button > .interaction-cue { display: block; grid-column: 1 / -1; grid-row: auto; width: auto; height: auto; margin-top: 12px; padding: 8px 12px; border: 1px solid currentColor; border-radius: 8px; background: transparent; color: var(--ku-brand-strong); font: 700 14px/1.4 var(--ku-font-body); }
 .flag-grid button.open small { max-height: none; }
 .flag-grid button:hover, .pattern-grid button:hover { border-color: var(--ku-brand-strong); }
 .flag-grid button:focus-visible, .pattern-grid button:focus-visible, .flip-card:focus-visible, .action-tabs button:focus-visible { outline: 3px solid var(--ku-brand-strong); outline-offset: 4px; }
 .flip-front i { align-self: flex-start; padding: 8px 12px; border: 1px solid currentColor; border-radius: 8px; font-style: normal; }
-@media (max-width: 600px) { .target-screens { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .target-screens, .deviation-map ol { grid-template-columns: 1fr; }
+  .deviation-map li:not(:last-child)::after { content: '↓'; right: auto; top: auto; bottom: -1.05rem; left: 50%; transform: translateX(-50%); }
+}
 
 .resource-panel {
   position: relative;
