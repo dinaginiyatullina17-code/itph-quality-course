@@ -106,10 +106,6 @@ const PAGE_GATES = {
     complete: () => completedTests.has('calc') && viewedPatterns.size === 2,
     hint: 'Изучи оба примера и реши тест.',
   },
-  prepare: {
-    complete: () => document.querySelectorAll('.prep-list input:checked').length === 3,
-    hint: 'Изучи и отметь все три шага подготовки.',
-  },
   control: {
     complete: () => completedTests.has('control') && openedFlags.size === 4,
     hint: 'Изучи все четыре сигнала и реши тест.',
@@ -636,14 +632,6 @@ function showPattern(btn, type) {
     : '<strong>20 мая:</strong> ITPH был выше цели шесть часов подряд и совпал с 16 негативными отзывами. Проверь скорость обслуживания, работу на станциях и конкретные отзывы, чтобы подтвердить причину.';
 }
 
-function updatePrep() {
-  const boxes = [...document.querySelectorAll('.prep-list input')];
-  const done = boxes.filter(box => box.checked).length;
-  const counter = document.getElementById('prep-count');
-  if (counter) counter.textContent = done + ' / ' + boxes.length;
-  if (done === boxes.length) document.getElementById('gate-reminder-prepare')?.setAttribute('hidden', '');
-}
-
 function toggleFlag(btn) {
   const isOpen = btn.classList.toggle('open');
   btn.setAttribute('aria-expanded', String(isOpen));
@@ -802,7 +790,6 @@ document.addEventListener('DOMContentLoaded', () => {
   navigateTo('home');
   applyHomeLocks();
   updateTestGates();
-  updatePrep();
   renderAction('quality');
 });
 window.addEventListener('load', loadProgress);

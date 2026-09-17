@@ -342,6 +342,7 @@ input:focus-visible {
 .control-loop div,
 .signal-pair article,
 .prep-list label,
+.prep-list article,
 .flag-grid button,
 .pattern-grid button,
 .pattern-feedback,
@@ -840,6 +841,22 @@ input:focus-visible {
   background: var(--ku-card);
 }
 
+.prep-list article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--ku-space-m);
+  align-items: start;
+  padding: var(--ku-space-m);
+  border: var(--ku-border-w) solid var(--ku-border);
+  border-radius: var(--ku-radius-m);
+  background: var(--ku-card);
+}
+
+.prep-list article > span:last-child {
+  display: grid;
+  gap: 0.45rem;
+}
+
 .target-screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .target-screen { margin: 0; overflow: hidden; border: var(--ku-border-w) solid var(--ku-border); border-radius: var(--ku-radius-m); background: var(--ku-card); box-shadow: var(--ku-shadow-s); }
 .screenshot-zoom { position: relative; display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
@@ -866,6 +883,13 @@ input:focus-visible {
 .flag-grid button > .interaction-cue,
 .pattern-grid button > .interaction-cue { display: block; grid-column: 1 / -1; grid-row: auto; width: auto; height: auto; margin-top: 12px; padding: 8px 12px; border: 1px solid currentColor; border-radius: 8px; background: transparent; color: var(--ku-brand-strong); font: 700 14px/1.4 var(--ku-font-body); }
 .flag-grid button.open small { max-height: none; }
+.flag-grid { align-items: stretch; }
+.flag-grid button.open { min-height: 19rem; grid-template-rows: auto 1fr auto; }
+.flag-grid button.open > span { grid-column: 1; grid-row: 1 / 3; }
+.flag-grid button.open > b { grid-column: 2; grid-row: 1; }
+.flag-grid button.open > b { min-height: 3.5rem; }
+.flag-grid button.open > small { grid-column: 2; grid-row: 2; align-self: start; }
+.flag-grid button.open > .interaction-cue { grid-column: 1 / -1; grid-row: 3; align-self: end; }
 .flag-grid button:hover, .pattern-grid button:hover { border-color: var(--ku-brand-strong); }
 .flag-grid button:focus-visible, .pattern-grid button:focus-visible, .flip-card:focus-visible, .action-tabs button:focus-visible { outline: 3px solid var(--ku-brand-strong); outline-offset: 4px; }
 .flip-front i { align-self: flex-start; padding: 8px 12px; border: 1px solid currentColor; border-radius: 8px; font-style: normal; }
@@ -1051,7 +1075,7 @@ input:focus-visible {
   .lesson-body, .home-content { width: 100%; }
   .hook-card, .formula-card, .quiz-card, .pattern-card, .brief-card, .case-card,
   .resource-panel, .completion-card, .callout, .deviation-map, .signal-pair article,
-  .prep-list label, .flag-grid button, .action-panel, .flip-card, .takeaway-path > li {
+  .prep-list label, .prep-list article, .flag-grid button, .action-panel, .flip-card, .takeaway-path > li {
     break-inside: avoid;
   }
   .flag-grid button small { max-height: none !important; opacity: 1 !important; }

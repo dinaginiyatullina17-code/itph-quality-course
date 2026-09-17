@@ -8,7 +8,7 @@
   <title>Как работать с ITPH на смене</title>
   <link rel="stylesheet" href="css/kuds.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-6">
+  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-7">
 </head>
 <body>
   <nav id="top-nav" aria-label="Навигация по курсу">
@@ -160,11 +160,11 @@
         </div>
       </header>
       <div class="content-wrap lesson-body">
-        <div class="prep-progress fade-in"><span>Отметь каждый шаг</span><b id="prep-count">0 / 3</b></div>
+        <div class="section-title fade-in"><p class="eyebrow">Перед сменой</p><h2>Изучи три шага подготовки</h2></div>
         <div class="prep-list fade-in">
-          <label><input type="checkbox" onchange="updatePrep()"><span class="prep-num">01</span><span><b>Возьми ориентир</b><small>Открой Brave&amp;Bold: сверь цель и учти ITPH по накоплению за месяц. Месячный итог покажет общую динамику. Для подготовки к пику отдельно посмотри почасовые данные аналогичного дня прошлой недели.</small></span></label>
-          <label><input type="checkbox" onchange="updatePrep()"><span class="prep-num">02</span><span><b>Учти это в расстановке</b><small>Используй отклонения ITPH в аналогичные дни прошлой недели и сравнивай одинаковые часы. Заранее подумай, кого привлечь для усиления западающей зоны в пик. Заложи время и ответственных за пополнение кассы, чистоту кухни, прилавка и зала, особенно если у ресторана собственный зал.</small></span></label>
-          <label><input type="checkbox" onchange="updatePrep()"><span class="prep-num">03</span><span><b>Поставь сотрудникам понятные цели</b><small>У каждого сотрудника должна быть конкретная и понятная цель по SMART. К пику готовимся заранее: сотрудник знает, где стоит, что делает и когда зовёт помощь.</small></span></label>
+          <article><span class="prep-num">01</span><span><b>Возьми ориентир</b><small>Открой Brave&amp;Bold: сверь цель и учти ITPH по накоплению за месяц. Месячный итог покажет общую динамику. Для подготовки к пику отдельно посмотри почасовые данные аналогичного дня прошлой недели.</small></span></article>
+          <article><span class="prep-num">02</span><span><b>Учти это в расстановке</b><small>Используй отклонения ITPH в аналогичные дни прошлой недели и сравнивай одинаковые часы. Заранее подумай, кого привлечь для усиления западающей зоны в пик. Заложи время и ответственных за пополнение кассы, чистоту кухни, прилавка и зала, особенно если у ресторана собственный зал.</small></span></article>
+          <article><span class="prep-num">03</span><span><b>Поставь сотрудникам понятные цели</b><small>У каждого сотрудника должна быть конкретная и понятная цель по SMART. К пику готовимся заранее: сотрудник знает, где стоит, что делает и когда зовёт помощь.</small></span></article>
         </div>
 
         <div class="brief-card brief-card--bad fade-in">
@@ -214,7 +214,7 @@
           <h2>Скорость обслуживания снижается: у кассы пять Гостей, кассир молчит, сборщик ждёт кухню, ITPH растёт второй час. Что сделать первым?</h2>
           <div class="choice-list">
             <button type="button" onclick="answerChoice(this, false, 'control-feedback')" data-feedback="Сначала нужно понять, какая зона замедляет поток. Перерыв кассира сейчас может усилить очередь.">Отправить кассира на перерыв и самому встать на кассу</button>
-            <button type="button" onclick="answerChoice(this, true, 'control-feedback')" data-test="control" data-success="Верно. Встань в зону наблюдения за работой сотрудников, определи западающую зону и перераспредели сотрудников по 4Н.">Встать в зону наблюдения, определить западающую зону и перераспределить сотрудников по 4Н</button>
+            <button type="button" onclick="answerChoice(this, true, 'control-feedback')" data-test="control" data-success="Так ты найдёшь причину замедления и усилишь именно ту зону, которой нужна помощь.">Встать в зону наблюдения, определить западающую зону и перераспределить сотрудников по 4Н</button>
             <button type="button" onclick="answerChoice(this, false, 'control-feedback')" data-feedback="Вызов сотрудника может быть нужен, но сначала определи западающую зону и проверь, поможет ли дополнительный человек.">Сразу вызвать дополнительного сотрудника на смену</button>
           </div>
           <div class="feedback-box" id="control-feedback" aria-live="polite"></div>
@@ -345,6 +345,6 @@
     <img id="screenshot-dialog-image" src="" alt="">
   </dialog>
 
-  <script src="script.js?v=20260917-6"></script>
+  <script src="script.js?v=20260917-7"></script>
 </body>
 </html>
