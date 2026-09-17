@@ -730,7 +730,7 @@ input:focus-visible {
 
 .flip-back small,
 .practice-result span {
-  color: var(--ku-contrast);
+  color: var(--ku-text-on-dark);
 }
 
 .case-data,
@@ -835,8 +835,20 @@ input:focus-visible {
 
 .takeaway-path > li:last-child > span {
   color: var(--ku-brand-strong);
-  background: var(--ku-contrast);
+  background: var(--ku-card);
 }
+
+.target-screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.target-screen { margin: 0; padding: 18px; border: 1px dashed var(--ku-text-muted); border-radius: 12px; background: var(--ku-surface); }
+.target-screen figcaption { margin-top: 8px; font-size: 13px; color: var(--ku-text-muted); }
+.target-note { padding: 16px 20px; border-left: 3px solid var(--ku-brand-strong); background: var(--ku-brand-soft); font-size: 15px; line-height: 1.6; }
+.flag-grid button > .interaction-cue,
+.pattern-grid button > .interaction-cue { display: block; grid-column: 1 / -1; grid-row: auto; width: auto; height: auto; margin-top: 12px; padding: 8px 12px; border: 1px solid currentColor; border-radius: 8px; background: transparent; color: var(--ku-brand-strong); font: 700 14px/1.4 var(--ku-font-body); }
+.flag-grid button.open small { max-height: none; }
+.flag-grid button:hover, .pattern-grid button:hover { border-color: var(--ku-brand-strong); }
+.flag-grid button:focus-visible, .pattern-grid button:focus-visible, .flip-card:focus-visible, .action-tabs button:focus-visible { outline: 3px solid var(--ku-brand-strong); outline-offset: 4px; }
+.flip-front i { align-self: flex-start; padding: 8px 12px; border: 1px solid currentColor; border-radius: 8px; font-style: normal; }
+@media (max-width: 600px) { .target-screens { grid-template-columns: 1fr; } }
 
 .resource-panel {
   position: relative;

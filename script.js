@@ -559,7 +559,7 @@ function showPattern(btn, type) {
   const feedback = document.getElementById('pattern-feedback');
   if (!feedback) return;
   feedback.innerHTML = type === 'low'
-    ? '<strong>18 мая:</strong> ITPH был ниже цели, но негативных отзывов не было. Проверь часовую динамику: это первый час или повторяющееся отклонение, которое нужно передать для корректировки расписания.'
+    ? '<strong>18 мая:</strong> ITPH был ниже цели, но отсутствие негативных отзывов не делает заниженный показатель хорошим результатом: нужно придерживаться цели. Проверь часовую динамику: это первый час или повторяющееся отклонение, которое нужно передать для корректировки расписания.'
     : '<strong>20 мая:</strong> ITPH был выше цели шесть часов подряд и совпал с 16 негативными отзывами. Проверь скорость обслуживания, работу на станциях и конкретные отзывы, чтобы подтвердить причину.';
 }
 
@@ -573,6 +573,8 @@ function updatePrep() {
 function toggleFlag(btn) {
   const isOpen = btn.classList.toggle('open');
   btn.setAttribute('aria-expanded', String(isOpen));
+  const cue = btn.querySelector('.interaction-cue');
+  if (cue) cue.textContent = isOpen ? 'Свернуть −' : 'Что проверить +';
 }
 
 
@@ -582,8 +584,8 @@ const ACTIONS = {
     tag: 'Риск скорости и качества',
     steps: [
       'Пойми причину: это резкий наплыв, сместился пик или высокий ITPH держится уже несколько часов.',
-      'Встань в зону наблюдения и определи западающую зону по скорости обслуживания и работе сотрудников.',
-      'Пересмотри расстановку: усили западающую зону опытным сотрудником или перераспредели сотрудников по 4Н.',
+      'Возьми 2–5 минут для наблюдения: определи западающую зону по скорости обслуживания и работе сотрудников.',
+      'Пересмотри расстановку: усиль западающую зону опытным сотрудником или перераспредели сотрудников по 4Н.',
       'При длительной перегрузке попроси сотрудника выйти раньше, договорись о выходе в выходной или попроси помощь у соседнего ресторана.',
     ],
   },
@@ -706,3 +708,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAction('quality');
 });
 window.addEventListener('load', loadProgress);
+
+// Visible action labels supplement hover states on touch screens.
+document.querySelectorAll('.flag-grid button, .pattern-grid button').forEach(btn => {
+  const cue = document.createElement('span');
+  cue.className = 'interaction-cue';
+  cue.textContent = btn.closest('.flag-grid') ? 'Что проверить +' : 'Открыть разбор →';
+  btn.appendChild(cue);
+});
