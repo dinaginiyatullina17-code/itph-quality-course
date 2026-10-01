@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru" data-audience="ms" data-direction="lyudi">
+<html lang="ru" data-audience="ms" data-direction="lyudi" data-ku-course="itph-quality-course">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -330,7 +330,7 @@
         <div class="completion-card fade-in">
           <span class="completion-mark">✓</span>
           <div><h2>Курс пройден</h2><p>В первую неделю не пытайся запомнить всё. Открывай шпаргалку, сверяйся и действуй.</p></div>
-          <button class="btn-primary" type="button" onclick="completeCourse()">Завершить курс</button>
+          <button id="ku-complete-button" data-ku-complete class="btn-primary" type="button">Завершить курс</button>
         </div>
         <div class="completion-panel" id="completion-panel" role="status"><b>Курс завершён.</b> Результат сохранён. Теперь можно вернуться к любой главе с главной страницы.</div>
       </div>
@@ -347,6 +347,7 @@
     <img id="screenshot-dialog-image" src="" alt="">
   </dialog>
 
+  <script src="scorm_api.js"></script>
   <script src="script.js?v=20261001-2"></script>
 </body>
 </html>

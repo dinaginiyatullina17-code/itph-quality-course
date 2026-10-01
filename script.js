@@ -177,7 +177,7 @@ function initFadeIn() {
    Состояние — крошечный JSON. Пишем в SCORM (cmi.suspend_data), если курс
    запущен в LMS, и дублируем в localStorage (для работы вне LMS).
    ВАЖНО про статус: «Завершён» НЕ ставим автоматически — только по кнопке
-   «Завершить» (SCORM.complete()). Прогресс открытия глав хранится отдельно.
+   «Завершить». Прогресс открытия глав хранится отдельно.
    ════════════════════════════════════════════════════════════════════════ */
 const PROGRESS_KEY = 'itph_quality_progress_v9';
 // Новая версия сбрасывает прогресс из прежних сборок курса.
@@ -211,24 +211,26 @@ function saveProgress() {
 }
 
 function loadProgress() {
-  // Каждое открытие курса считается новой попыткой: старый прогресс,
-  // ответы и итог предыдущего прохождения не восстанавливаем.
   unlockedChapters = 1;
   completedTests.clear();
   for (let i = 0; i < hubDone.length; i++) hubDone[i] = false;
+
+  let json = '';
+  if (window.SCORM && typeof SCORM.get === 'function') {
+    json = SCORM.get('cmi.suspend_data') || '';
+  }
+  if (!json) {
+    try { json = localStorage.getItem(PROGRESS_KEY) || ''; } catch (e) {}
+  }
   try {
-    localStorage.removeItem(PROGRESS_KEY);
-    localStorage.removeItem(PROGRESS_KEY + '_completed');
+    const state = JSON.parse(json);
+    if (state && state.version === PROGRESS_VERSION) {
+      unlockedChapters = Math.max(1, Math.min(CHAPTER_ORDER.length, Number(state.unlocked) || 1));
+      if (Array.isArray(state.hub)) state.hub.slice(0, hubDone.length).forEach((v, i) => { hubDone[i] = !!v; });
+      if (Array.isArray(state.tests)) state.tests.forEach(id => completedTests.add(id));
+    }
   } catch (e) {}
 
-  if (window.SCORM && typeof SCORM.set === 'function') {
-    SCORM.set('cmi.suspend_data', JSON.stringify(collectState()));
-    SCORM.set('cmi.core.lesson_status', 'incomplete');
-    SCORM.set('cmi.core.score.raw', '0');
-    SCORM.set('cmi.core.score.min', '0');
-    SCORM.set('cmi.core.score.max', '100');
-    if (typeof SCORM.commit === 'function') SCORM.commit();
-  }
   applyHomeLocks();
   updateTestGates();
   // applyHubLocks();
@@ -760,15 +762,12 @@ function resetZonePool(poolId, ...zoneIds) {
 /* Финальный шаг курса. Явно отправляем SCORM 1.2-статус passed и сохраняем
    локальный флаг, чтобы результат был виден и при локальном открытии. */
 function completeCourse() {
-  try { localStorage.setItem(PROGRESS_KEY + '_completed', 'passed'); } catch (e) {}
+  try { localStorage.setItem(PROGRESS_KEY + '_completed', 'completed'); } catch (e) {}
   unlockedChapters = CHAPTER_ORDER.length;
   saveProgress();
   applyHomeLocks();
   if (window.SCORM && typeof SCORM.complete === 'function') {
     SCORM.complete();
-  } else if (window.SCORM && typeof SCORM.set === 'function') {
-    SCORM.set('cmi.core.lesson_status', 'passed');
-    if (typeof SCORM.commit === 'function') SCORM.commit();
   }
   document.getElementById('completion-panel')?.classList.add('show');
   // В LMS курс обычно открыт отдельным окном. Статус уже отправлен выше,
@@ -791,6 +790,9 @@ document.addEventListener('DOMContentLoaded', () => {
   applyHomeLocks();
   updateTestGates();
   renderAction('quality');
+});
+document.addEventListener('click', event => {
+  if (event.target.closest("#ku-complete-button")) completeCourse();
 });
 window.addEventListener('load', loadProgress);
 
