@@ -759,7 +759,7 @@ function resetZonePool(poolId, ...zoneIds) {
   shuffleChildren(pool);
 }
 
-/* Финальный шаг курса. Явно отправляем SCORM 1.2-статус passed и сохраняем
+/* Финальный шаг курса. Явно отправляем SCORM 1.2-статус completed и сохраняем
    локальный флаг, чтобы результат был виден и при локальном открытии. */
 function completeCourse() {
   try { localStorage.setItem(PROGRESS_KEY + '_completed', 'completed'); } catch (e) {}
@@ -770,12 +770,11 @@ function completeCourse() {
     SCORM.complete();
   }
   document.getElementById('completion-panel')?.classList.add('show');
-  // В LMS курс обычно открыт отдельным окном. Статус уже отправлен выше,
-  // поэтому после завершения закрываем это окно. Если браузер запрещает
-  // закрытие (например, при локальном открытии), остаётся сообщение о завершении.
-  setTimeout(() => {
-    try { window.close(); } catch (e) {}
-  }, 150);
+  const button = document.getElementById('ku-complete-button');
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Курс завершён';
+  }
 }
 
 
