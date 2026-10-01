@@ -8,7 +8,7 @@
   <title>Как работать с ITPH на смене</title>
   <link rel="stylesheet" href="css/kuds.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/ms-lyudi.css?v=20260917-8">
+  <link rel="stylesheet" href="css/ms-lyudi.css?v=20261001-1">
 </head>
 <body>
   <nav id="top-nav" aria-label="Навигация по курсу">
@@ -30,6 +30,7 @@
       <div class="hero-placeholder" role="img" aria-label="Графическая обложка курса направления Люди">
         <img class="hero-art" src="assets/images/6708CA46-15E6-4EEC-A063-1A05C9A79D64.jpg" alt="" aria-hidden="true">
         <div class="hero-copy">
+          <span class="course-duration">⏱ 10–15 минут</span>
           <h1>Как работать<br>с ITPH<br>на смене</h1>
           <p>Смотри на производительность, скорость обслуживания и работу на станциях, чтобы вовремя принимать решение.</p>
           <button class="btn-primary" type="button" onclick="navigateTo('intro')">Начать курс <span aria-hidden="true">→</span></button>
@@ -213,9 +214,9 @@
           <div class="quiz-top"><span>Ситуация на смене</span><b>02</b></div>
           <h2>Скорость обслуживания снижается: у кассы пять Гостей, кассир молчит, сборщик ждёт кухню, ITPH растёт второй час. Что сделать первым?</h2>
           <div class="choice-list">
-            <button type="button" onclick="answerChoice(this, false, 'control-feedback')" data-feedback="Сначала нужно понять, какая зона замедляет поток. Перерыв кассира сейчас может усилить очередь.">Отправить кассира на перерыв и самому встать на кассу</button>
+            <button type="button" onclick="answerChoice(this, false, 'control-feedback')" data-feedback="Ты отреагируешь на очередь, но не проверишь, где возникла основная задержка и нужна ли смена расстановки.">Проверить очередь у кассы и самому встать на неё, не меняя остальную расстановку</button>
             <button type="button" onclick="answerChoice(this, true, 'control-feedback')" data-test="control" data-success="Так ты найдёшь причину замедления и усилишь именно ту зону, которой нужна помощь.">Встать в зону наблюдения, определить западающую зону и перераспределить сотрудников по 4Н</button>
-            <button type="button" onclick="answerChoice(this, false, 'control-feedback')" data-feedback="Вызов сотрудника может быть нужен, но сначала определи западающую зону и проверь, поможет ли дополнительный человек.">Сразу вызвать дополнительного сотрудника на смену</button>
+            <button type="button" onclick="answerChoice(this, false, 'control-feedback')" data-feedback="Вызов сотрудника может быть нужен, но сначала определи западающую зону и проверь, поможет ли дополнительный человек.">Вызвать дополнительного сотрудника и поставить его на кухню до завершения пика</button>
           </div>
           <div class="feedback-box" id="control-feedback" aria-live="polite"></div>
         </div>
@@ -274,9 +275,9 @@
           <div class="case-data"><span>Утро</span><b>ITPH 18</b><small>цель 25 · скорость обслуживания в норме · отзывов 0</small></div>
           <h2>На смене работают три сотрудника, поток Гостей ниже прогноза.</h2>
           <div class="choice-list">
-            <button type="button" onclick="answerCase(this, false, 'case-feedback-1')" data-feedback="Уборка полезна, но сама по себе не устраняет повторяющееся отклонение ITPH. Сначала проверь динамику.">Оставить состав без изменений и занять свободного сотрудника уборкой до конца смены</button>
-            <button type="button" onclick="answerCase(this, true, 'case-feedback-1')" data-success="Верно. Сначала проверь, это первый час или повторяющееся отклонение. Затем реши: отпустить сотрудника домой, вывести кого-то позже или перенаправить сотрудника в другой ресторан — без ущерба следующему управляющему сменой.">Проверить динамику и принять решение по сотрудникам</button>
-            <button type="button" onclick="answerCase(this, false, 'case-feedback-1')" data-feedback="Один низкий час ещё не подтверждает устойчивое отклонение. Сначала сравни несколько часов и учти ожидаемый поток.">Вывести следующего сотрудника позже, ориентируясь только на текущий час</button>
+            <button type="button" onclick="answerCase(this, false, 'case-feedback-1')" data-feedback="Уборка полезна, но сама по себе не устраняет повторяющееся отклонение ITPH. Сначала проверь динамику.">Оставить текущий состав и направить свободного сотрудника на уборку до конца смены</button>
+            <button type="button" onclick="answerCase(this, true, 'case-feedback-1')" data-success="Верно. Сначала проверь, это первый час или повторяющееся отклонение. Затем реши: отпустить сотрудника домой, вывести кого-то позже или перенаправить сотрудника в другой ресторан — без ущерба следующему управляющему сменой.">Проверить динамику ITPH и прогноз потока, затем решить, нужно ли менять состав смены</button>
+            <button type="button" onclick="answerCase(this, false, 'case-feedback-1')" data-feedback="Один низкий час ещё не подтверждает устойчивое отклонение. Сначала сравни несколько часов и учти ожидаемый поток.">Перенести выход следующего сотрудника на более позднее время по данным текущего часа</button>
           </div>
           <div class="feedback-box" id="case-feedback-1" aria-live="polite"></div>
         </div>
@@ -286,8 +287,8 @@
           <h2>Сотрудники работают быстро, но ожидание растёт.</h2>
           <div class="choice-list">
             <button type="button" onclick="answerCase(this, true, 'case-feedback-2')" data-success="Верно. Встань в зону наблюдения, определи западающую зону, проверь работу сотрудников и усиль её опытным сотрудником. Затем снова оцени скорость обслуживания и качество.">Встать в зону наблюдения, определить западающую зону и усилить её опытным сотрудником</button>
-            <button type="button" onclick="answerCase(this, false, 'case-feedback-2')" data-feedback="Дополнительный сотрудник может помочь, но сначала нужно определить, где именно возникла задержка.">Позвать сотрудника раньше и поставить его на кухню</button>
-            <button type="button" onclick="answerCase(this, false, 'case-feedback-2')" data-feedback="Помощь управляющего может временно ускорить работу, но сначала нужно понять причину и скорректировать расстановку команды.">Самому встать на самую загруженную станцию до конца пика</button>
+            <button type="button" onclick="answerCase(this, false, 'case-feedback-2')" data-feedback="Дополнительный сотрудник может помочь, но сначала нужно определить, где именно возникла задержка.">Позвать дополнительного сотрудника раньше и сразу поставить его на кухню до конца пика</button>
+            <button type="button" onclick="answerCase(this, false, 'case-feedback-2')" data-feedback="Помощь управляющего может временно ускорить работу, но сначала нужно понять причину и скорректировать расстановку команды.">Самому встать на самую загруженную станцию и оставаться там до завершения обеденного пика</button>
           </div>
           <div class="feedback-box" id="case-feedback-2" aria-live="polite"></div>
         </div>
@@ -345,6 +346,6 @@
     <img id="screenshot-dialog-image" src="" alt="">
   </dialog>
 
-  <script src="script.js?v=20260917-8"></script>
+  <script src="script.js?v=20261001-1"></script>
 </body>
 </html>

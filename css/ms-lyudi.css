@@ -149,6 +149,19 @@ input:focus-visible {
   padding: var(--ku-space-2xl) 0;
 }
 
+.course-duration {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: var(--ku-space-m);
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--ku-radius-pill);
+  color: var(--ku-text);
+  background: color-mix(in srgb, var(--ku-card) 88%, transparent);
+  box-shadow: var(--ku-shadow-s);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
 .hero-copy h1 {
   max-width: 34rem;
   margin: 0 0 var(--ku-space-m);
