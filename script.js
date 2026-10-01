@@ -71,7 +71,7 @@ function navigateTo(pageId) {
   if (!target) return;
   target.classList.add('active');
   currentPage = pageId;
-  document.getElementById('nav-back-btn')?.toggleAttribute('hidden', pageId === 'home');
+  document.getElementById('course-back-btn')?.toggleAttribute('hidden', pageId === 'home');
   window.scrollTo({ top: 0, behavior: 'auto' });
 
   // 2) шапка + прогресс-бар

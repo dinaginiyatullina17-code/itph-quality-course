@@ -8,14 +8,11 @@
   <title>Как работать с ITPH на смене</title>
   <link rel="stylesheet" href="css/kuds.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/ms-lyudi.css?v=20261001-1">
+  <link rel="stylesheet" href="css/ms-lyudi.css?v=20261001-2">
 </head>
 <body>
   <nav id="top-nav" aria-label="Навигация по курсу">
     <div class="nav-inner">
-      <button class="nav-back-btn" id="nav-back-btn" type="button" onclick="goBack()" aria-label="Вернуться к предыдущей главе">
-        <span aria-hidden="true">←</span><span>Назад</span>
-      </button>
       <button class="nav-home-btn" type="button" onclick="navigateTo('home')" aria-label="Вернуться на главную">
         <span>К курсу</span>
       </button>
@@ -341,11 +338,15 @@
 
   </main>
 
+  <button class="course-back-btn" id="course-back-btn" type="button" onclick="goBack()" aria-label="Вернуться к предыдущей главе" hidden>
+    <span aria-hidden="true">←</span><span>Назад</span>
+  </button>
+
   <dialog class="screenshot-dialog" id="screenshot-dialog" onclick="closeScreenshot(event)">
     <button class="screenshot-dialog-close" type="button" onclick="closeScreenshot()" aria-label="Закрыть увеличенный скриншот">×</button>
     <img id="screenshot-dialog-image" src="" alt="">
   </dialog>
 
-  <script src="script.js?v=20261001-1"></script>
+  <script src="script.js?v=20261001-2"></script>
 </body>
 </html>
