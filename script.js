@@ -775,14 +775,6 @@ function completeCourse() {
     button.disabled = true;
     button.textContent = 'Курс завершён';
   }
-  // Даём LMS завершить запись результата, обновляем исходную страницу
-  // WebSoft и закрываем окно курса. Обновление сразу показывает флаг завершения.
-  setTimeout(() => {
-    try {
-      if (window.opener && !window.opener.closed) window.opener.location.reload();
-    } catch (e) {}
-    try { window.close(); } catch (e) {}
-  }, 700);
 }
 
 
