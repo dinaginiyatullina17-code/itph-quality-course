@@ -60,6 +60,75 @@
   --shadow:      0 4px 20px rgba(0,0,0,0.12);
 }
 
+/* Visual story panels: full-text course with stronger image rhythm. */
+.story-visual {
+  position: relative;
+  margin: 28px 0 34px;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #1f140f;
+  box-shadow: 0 18px 46px rgba(63, 30, 10, 0.18);
+  isolation: isolate;
+}
+
+.story-visual::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent, rgba(31, 20, 15, 0.9));
+  pointer-events: none;
+}
+
+.story-visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.story-visual:hover img { transform: scale(1.018); }
+
+.story-visual figcaption {
+  position: absolute;
+  z-index: 2;
+  right: 28px;
+  bottom: 26px;
+  left: 28px;
+  display: grid;
+  gap: 7px;
+  max-width: 660px;
+  color: #fff;
+}
+
+.story-visual figcaption span {
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #20130e;
+  background: #ffcc3b;
+  font: 800 12px/1.1 var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.story-visual figcaption b {
+  font: 700 clamp(18px, 2.5vw, 28px)/1.18 var(--font-head);
+  text-wrap: balance;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+}
+
+.story-visual--briefing figcaption span { background: #f49b22; }
+.story-visual--control figcaption span { background: #62d175; }
+
+@media (max-width: 640px) {
+  .story-visual { margin: 22px -8px 28px; border-radius: 20px; }
+  .story-visual img { aspect-ratio: 4 / 5; }
+  .story-visual figcaption { right: 18px; bottom: 18px; left: 18px; }
+  .story-visual figcaption b { font-size: 18px; }
+}
+
 
 /* ════════════════════════════════════════════════════════════════════════
    1. БАЗА
