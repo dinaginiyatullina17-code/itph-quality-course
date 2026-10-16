@@ -1003,6 +1003,29 @@ input:focus-visible {
   background: var(--ku-success-soft);
 }
 
+/* LMS viewport: keep the whole course cover visible at browser zoom levels. */
+@media (min-width: 781px) {
+  .hero-placeholder {
+    height: calc(100dvh - 3.5rem);
+    min-height: 0;
+    max-height: none;
+  }
+
+  .hero-art {
+    object-fit: contain;
+    object-position: center;
+    background: #edfafa;
+  }
+
+  .hero-copy {
+    padding-top: clamp(1.5rem, 4vh, 3.5rem);
+    padding-bottom: clamp(1.5rem, 4vh, 3.5rem);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3rem, 1.8rem + 3.4vw, 5rem);
+  }
+}
 @media (max-width: 780px) {
   .person-hours-arrow,
   .person-hours-calc {
