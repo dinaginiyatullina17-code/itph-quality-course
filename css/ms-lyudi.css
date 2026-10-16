@@ -1006,7 +1006,7 @@ input:focus-visible {
 /* LMS viewport: keep the whole course cover visible at browser zoom levels. */
 @media (min-width: 781px) {
   .hero-placeholder {
-    height: calc(100dvh - 3.5rem);
+    height: calc(100dvh - 5rem);
     min-height: 0;
     max-height: none;
   }
